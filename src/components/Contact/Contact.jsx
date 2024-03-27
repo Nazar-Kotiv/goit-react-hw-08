@@ -3,6 +3,7 @@ import css from "./Contact.module.css";
 // import { useDispatch } from "react-redux";
 // import { deleteContact } from "../../redux/contacts/contactsOps";
 import ModalWindow from "../Modal/Modal";
+import ModalEdit from "../ModalEdit/ModalEdit";
 import { useState } from "react";
 import ContactsEditorName from "../ContactsEditorName/ContactsEditorName";
 import ContactsEditorNumber from "../ContactsEditorNumber/ContactsEditorNumber";
@@ -14,17 +15,22 @@ export default function Contact({ contact }) {
   // const handleDelete = () => dispatch(deleteContact(contact.id));
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [modalEdit, setModalEdit] = useState(false);
+
   const openModal = () => {
     setModalOpen(true);
   };
-
-  // const toggleModal = () => {
-  //   setModalOpen(!modalOpen);
-  // };
-  function closeModal() {
+  const closeModal = () => {
     setModalOpen(false);
-  }
+  };
 
+  const openModalEdit = () => {
+    setModalEdit(true);
+  };
+
+  const closeModalEdit = () => {
+    setModalOpe(false);
+  };
   return (
     <div className={css.listItem}>
       <div className={css.positionContainer}>
@@ -75,6 +81,14 @@ export default function Contact({ contact }) {
           isOpen={modalOpen}
           contact={contact}
           closeModal={closeModal}
+        />
+      )}
+      <button onClick={openModalEdit}> Edit</button>
+      {modalEdit && (
+        <ModalEdit
+          isOpen={modalEdit}
+          contact={contact}
+          closeModal={closeModalEdit}
         />
       )}
     </div>
