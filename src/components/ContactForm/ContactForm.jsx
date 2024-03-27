@@ -3,9 +3,11 @@ import * as Yup from "yup";
 import styles from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/contactsOps";
+import toast from "react-hot-toast";
 
 export default function ContactForm() {
   const dispatch = useDispatch();
+  const contactAddNotify = () => toast.success(`You Add new contact`);
 
   const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
@@ -23,6 +25,7 @@ export default function ContactForm() {
       name: values.name,
       number: values.number,
     };
+    contactAddNotify();
     actions.resetForm();
     dispatch(addContact(newContact));
   };

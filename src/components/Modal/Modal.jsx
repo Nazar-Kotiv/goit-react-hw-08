@@ -1,24 +1,4 @@
-// import { useState } from "react";
-// import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-
-// export default function ModalWindow() {
-//   return (
-//     <div>
-//       <Button color="primary" onClick={toggleModal}>
-//         Open Modal
-//       </Button>
-//       <Modal isOpen={modalOpen} toggle={toggleModal}>
-//         <ModalBody>This is the content of the modal</ModalBody>
-//         <ModalFooter>
-//           <Button color="secondary" onClick={toggleModal}>
-//             Close
-//           </Button>
-//         </ModalFooter>
-//       </Modal>
-//     </div>
-//   );
-// }
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import Modal from "react-modal";
 import { deleteContact } from "../../redux/contacts/contactsOps";
 import { useDispatch } from "react-redux";
@@ -26,8 +6,12 @@ Modal.setAppElement("#root");
 
 export default function ModalWindow({ isOpen, contact, closeModal }) {
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContact(contact.id));
-  //   const notify = () => toast("Here is your toast.");
+  const contactDeliteNotify = () => toast.error(`You delite contact`);
+  const handleDelete = () => {
+    dispatch(deleteContact(contact.id));
+    contactDeliteNotify();
+  };
+
   return (
     <Modal
       isOpen={isOpen}

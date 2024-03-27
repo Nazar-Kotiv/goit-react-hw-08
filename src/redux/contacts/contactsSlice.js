@@ -3,11 +3,8 @@ import {
   fetchContacts,
   deleteContact,
   addContact,
-  updateContacts,
+  // updateContacts,
 } from "./contactsOps";
-import toast from "react-hot-toast";
-const contactDeliteNotify = () => toast.error(`You delite contact`);
-const contactAddNotify = () => toast.success(`You Add new contact`);
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -40,7 +37,6 @@ const contactsSlice = createSlice({
         state.items = state.items.filter(
           (contact) => contact.id !== action.payload.id
         );
-        contactDeliteNotify();
       })
       .addCase(deleteContact.rejected, (state) => {
         state.loading = false;
@@ -53,18 +49,17 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items.push(action.payload);
-        contactAddNotify();
       })
       .addCase(addContact.rejected, (state) => {
         state.loading = false;
         state.error = true;
-      })
-      .addCase(updateContacts.fulfilled, (state, action) => {
-        const taskIndex = state.items.findIndex(
-          (item) => item.id === action.payload.id
-        );
-        state.items[taskIndex] = action.payload;
       }),
+  // .addCase(updateContacts.fulfilled, (state, action) => {
+  //   const taskIndex = state.items.findIndex(
+  //     (item) => item.id === action.payload.id
+  //   );
+  //   state.items[taskIndex] = action.payload;
+  // }),
 });
 
 export const contactsReducer = contactsSlice.reducer;

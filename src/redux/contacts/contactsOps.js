@@ -38,17 +38,15 @@ export const addContact = createAsyncThunk(
   }
 );
 
-export const updateContacts = createAsyncThunk(
-  "contacts/updateContacts",
-  async (contactId, thunkAPI) => {
-    try {
-      const response = await axios.patch(
-        `/contacts/${contactId.id}`,
-        contactId
-      );
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const updateContacts = createAsyncThunk(
+//   "contacts/updateContacts",
+//   async (update, thunkAPI) => {
+//     try {
+//       const response = await axios.patch(`/contacts/${update.id}`, update);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
