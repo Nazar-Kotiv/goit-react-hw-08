@@ -3,7 +3,7 @@ import {
   fetchContacts,
   deleteContact,
   addContact,
-  // updateContacts,
+  updateContacts,
 } from "./contactsOps";
 
 const contactsSlice = createSlice({
@@ -53,13 +53,13 @@ const contactsSlice = createSlice({
       .addCase(addContact.rejected, (state) => {
         state.loading = false;
         state.error = true;
+      })
+      .addCase(updateContacts.fulfilled, (state, action) => {
+        const taskIndex = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.items[taskIndex] = action.payload;
       }),
-  // .addCase(updateContacts.fulfilled, (state, action) => {
-  //   const taskIndex = state.items.findIndex(
-  //     (item) => item.id === action.payload.id
-  //   );
-  //   state.items[taskIndex] = action.payload;
-  // }),
 });
 
 export const contactsReducer = contactsSlice.reducer;

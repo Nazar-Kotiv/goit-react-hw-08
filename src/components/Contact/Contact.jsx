@@ -4,12 +4,12 @@ import css from "./Contact.module.css";
 // import { deleteContact } from "../../redux/contacts/contactsOps";
 import ModalWindow from "../Modal/Modal";
 import { useState } from "react";
-// import ContactsEditorName from "../ContactsEditorName/ContactsEditorName";
-// import ContactsEditorNumber from "../ContactsEditorNumber/ContactsEditorNumber";
+import ContactsEditorName from "../ContactsEditorName/ContactsEditorName";
+import ContactsEditorNumber from "../ContactsEditorNumber/ContactsEditorNumber";
 
 export default function Contact({ contact }) {
-  // const [isEditingName, setIsEditingName] = useState(false);
-  // const [isEditingNumber, setIsEditingNumber] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [isEditingNumber, setIsEditingNumber] = useState(false);
   // const dispatch = useDispatch();
   // const handleDelete = () => dispatch(deleteContact(contact.id));
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function Contact({ contact }) {
         <div className={css.iconContainer}>
           <FaUser />
 
-          {/* {isEditingName ? (
+          {isEditingName ? (
             <ContactsEditorName
               initialValueName={contact.name}
               initialValueNumber={contact.number}
@@ -46,12 +46,12 @@ export default function Contact({ contact }) {
             >
               {contact.name}
             </p>
-          )} */}
-          <p className={css.text}> {contact.name}</p>
+          )}
+          {/* <p className={css.text}> {contact.name}</p> */}
         </div>
         <div className={css.iconContainer}>
           <FaPhone />
-          {/* {isEditingNumber ? (
+          {isEditingNumber ? (
             <ContactsEditorNumber
               initialValueNumber={contact.number}
               contactId={contact.id}
@@ -64,9 +64,9 @@ export default function Contact({ contact }) {
               }}
             >
               {contact.number}
-            </p> */}
-          <p className={css.text}> {contact.number}</p>
-          {/* )} */}
+            </p>
+          )}
+          {/* <p className={css.text}> {contact.number}</p> */}
         </div>
       </div>
       <button onClick={openModal}>Delete</button>
