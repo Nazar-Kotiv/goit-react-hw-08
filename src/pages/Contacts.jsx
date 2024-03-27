@@ -1,3 +1,33 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PageTitle from "../components/PageTitle/PageTitle";
+import ContactList from "../components/ContactList/ContactList";
+// import TaskEditor from "../components/TaskEditor/TaskEditor";
+import { fetchContacts } from "../redux/contacts/contactsOps";
+import { selectLoading } from "../redux/contacts/selector";
+import ContactForm from "../components/ContactForm/ContactForm";
+import SearchBox from "../components/SearchBox/SearchBox";
+
+export default function Tasks() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectLoading);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  return (
+    <>
+      <PageTitle>Your Contacts</PageTitle>
+      {/* <TaskEditor /> */}
+      <ContactForm />
+      <SearchBox />
+      <div>{isLoading && "Request in progress..."}</div>
+      <ContactList />
+    </>
+  );
+}
+
 // import ContactList from "../ContactList/ContactList";
 // import SearchBox from "../SearchBox/SearchBox";
 // import ContactForm from "../ContactForm/ContactForm";
@@ -31,29 +61,3 @@
 //     </div>
 //   );
 // }
-
-import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import Layout from "../Layout/Layout";
-
-const HomePage = lazy(() => import("../../pages/HomePage"));
-const RegisterPage = lazy(() => import("../../pages/Register"));
-const LoginPage = lazy(() => import("../../pages/Login"));
-const ContactsPage = lazy(() => import("../../pages/Contacts"));
-
-export default function App() {
-  return (
-    <Layout>
-      <Suspense fallback={null}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/contacts" element={<ContactsPage />} />
-        </Routes>
-      </Suspense>
-      <Toaster />
-    </Layout>
-  );
-}

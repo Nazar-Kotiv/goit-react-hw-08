@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, deleteContact, addContact } from "./contactsOps";
-import { createSelector } from "@reduxjs/toolkit";
-import { selectFilter } from "./filtersSlice";
+import {
+  fetchContacts,
+  deleteContact,
+  addContact,
+  updateContacts,
+} from "./contactsOps";
+import toast from "react-hot-toast";
+const contactDeliteNotify = () => toast.error(`You delite contact`);
+const contactAddNotify = () => toast.success(`You Add new contact`);
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -34,6 +40,7 @@ const contactsSlice = createSlice({
         state.items = state.items.filter(
           (contact) => contact.id !== action.payload.id
         );
+        contactDeliteNotify();
       })
       .addCase(deleteContact.rejected, (state) => {
         state.loading = false;
@@ -46,26 +53,18 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items.push(action.payload);
+        contactAddNotify();
       })
       .addCase(addContact.rejected, (state) => {
         state.loading = false;
         state.error = true;
+      })
+      .addCase(updateContacts.fulfilled, (state, action) => {
+        const taskIndex = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.items[taskIndex] = action.payload;
       }),
 });
-
-export const selectLoading = (state) => state.contacts.loading;
-
-export const selectError = (state) => state.contacts.error;
-
-export const selectContacts = (state) => state.contacts.items;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectFilter],
-  (contacts, filter) => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }
-);
 
 export const contactsReducer = contactsSlice.reducer;
