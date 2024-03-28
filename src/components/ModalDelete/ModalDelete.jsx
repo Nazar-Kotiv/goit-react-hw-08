@@ -2,13 +2,14 @@ import toast from "react-hot-toast";
 import Modal from "react-modal";
 import { deleteContact } from "../../redux/contacts/contactsOps";
 import { useDispatch } from "react-redux";
-import css from "./Modal.module.css"; // імпортуй стилі з модуля
+import css from "./ModalDelete.module.css";
 
 Modal.setAppElement("#root");
 
-export default function ModalWindow({ isOpen, contact, closeModal }) {
+export default function ModalDelete({ isOpen, contact, closeModal }) {
   const dispatch = useDispatch();
-  const contactDeleteNotify = () => toast.error(`You deleted the contact`);
+  const contactDeleteNotify = () =>
+    toast.error(`You deleted the contact ${contact.name}`);
 
   const handleDelete = () => {
     dispatch(deleteContact(contact.id));
@@ -26,10 +27,14 @@ export default function ModalWindow({ isOpen, contact, closeModal }) {
       shouldCloseOnOverlayClick={true}
     >
       <div className={css.modalContent}>
-        <p>You want to delete contact {contact.name} ?</p>
+        <p>You wont to delete contact {contact.name} ?</p>
         <div className={css.buttonContainer}>
-          <button onClick={handleDelete}>YES</button>
-          <button onClick={closeModal}>NO</button>
+          <button className={css.button} onClick={handleDelete}>
+            YES
+          </button>
+          <button className={css.button} onClick={closeModal}>
+            NO
+          </button>
         </div>
       </div>
     </Modal>

@@ -1,7 +1,10 @@
 import Modal from "react-modal";
+import * as Yup from "yup";
+import css from "./ModalEdit.module.css";
+import toast from "react-hot-toast";
+
 import { useDispatch } from "react-redux";
-// import css from "./Modal.module.css";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
 import { updateContacts } from "../../redux/contacts/contactsOps";
 
@@ -9,12 +12,24 @@ Modal.setAppElement("#root");
 
 export default function ModalEdit({
   isOpen,
-  contact,
-  closeModal,
+  closeModalEdit,
   contactId,
   initialValueNumber,
   initialValueName,
 }) {
+  const ValidEditionSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(1, "Too Short Name!")
+      .max(35, "Too Long Name!")
+      .required("Required"),
+    number: Yup.string()
+      .min(1, "Too Short Number!")
+      .max(11, "Too Long Number!")
+      .required("Required"),
+  });
+
+  const contactEditNotify = () => toast.success("You edit contact");
+
   const dispatch = useDispatch();
   const [name, setName] = useState(initialValueName);
   const [number, setNumber] = useState(initialValueNumber);
@@ -27,6 +42,8 @@ export default function ModalEdit({
         id: contactId,
       })
     );
+    contactEditNotify();
+    closeModalEdit();
   };
 
   useEffect(() => {
@@ -40,7 +57,7 @@ export default function ModalEdit({
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={closeModal}
+      onRequestClose={closeModalEdit}
       contentLabel="Modal Edit"
       portalClassName={css.portal}
       overlayClassName={css.overlay}
@@ -53,11 +70,24 @@ export default function ModalEdit({
           number,
         }}
         onSubmit={handleSubmit}
+        validationSchema={ValidEditionSchema}
       >
-        <Form autoComplete="off">
-          <Field type="text" name="name" />
-          <Field type="text" name="number" />
-          <button type="submit">Save</button>
+        <Form className={css.form} autoComplete="off">
+          <Field className={css.input} type="text" name="name" />
+          <ErrorMessage
+            name="name"
+            component="div"
+            className={css.errorMessage}
+          />
+          <Field className={css.input} type="text" name="number" />
+          <ErrorMessage
+            name="number"
+            component="div"
+            className={css.errorMessage}
+          />
+          <button className={css.button} type="submit">
+            Save Edit
+          </button>
         </Form>
       </Formik>
     </Modal>

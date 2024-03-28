@@ -37,6 +37,7 @@ export default function ContactForm() {
       validationSchema={FeedbackSchema}
     >
       <Form className={styles.formContainer}>
+        <h3>Create a new contact</h3>
         <div className={styles.formField}>
           <label htmlFor="name" className={styles.label}>
             Name
