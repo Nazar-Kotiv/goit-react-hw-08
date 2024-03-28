@@ -1,6 +1,7 @@
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/authOps";
+import { logIn } from "../../redux/auth/operation";
+
 import css from "./LoginForm.module.css";
 
 export default function LoginForm() {

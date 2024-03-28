@@ -1,9 +1,10 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import toast from "react-hot-toast";
 import * as Yup from "yup";
 import styles from "./ContactForm.module.css";
+
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/contactsOps";
-import toast from "react-hot-toast";
+import { addContact } from "../../redux/contacts/operation";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 export default function ContactForm() {
   const dispatch = useDispatch();

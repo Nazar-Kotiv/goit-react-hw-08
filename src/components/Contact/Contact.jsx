@@ -1,18 +1,12 @@
-import { FaPhone, FaUser } from "react-icons/fa";
 import css from "./Contact.module.css";
-// import { useDispatch } from "react-redux";
-// import { deleteContact } from "../../redux/contacts/contactsOps";
 import ModalDelete from "../ModalDelete/ModalDelete";
 import ModalEdit from "../ModalEdit/ModalEdit";
+
 import { useState } from "react";
+import { FaPhone, FaUser } from "react-icons/fa";
 
 export default function Contact({ contact }) {
-  // const [isEditingName, setIsEditingName] = useState(false);
-  // const [isEditingNumber, setIsEditingNumber] = useState(false);
-  // const dispatch = useDispatch();
-  // const handleDelete = () => dispatch(deleteContact(contact.id));
   const [modalOpen, setModalOpen] = useState(false);
-
   const [modalEdit, setModalEdit] = useState(false);
 
   const openModal = () => {

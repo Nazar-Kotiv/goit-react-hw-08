@@ -4,7 +4,7 @@ import {
   deleteContact,
   addContact,
   updateContacts,
-} from "./contactsOps";
+} from "./operation";
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -54,11 +54,20 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = true;
       })
+      .addCase(updateContacts.pending, (state) => {
+        state.error = false;
+        state.loading = true;
+      })
       .addCase(updateContacts.fulfilled, (state, action) => {
-        const taskIndex = state.items.findIndex(
+        state.loading = false;
+        const contactsIndex = state.items.findIndex(
           (item) => item.id === action.payload.id
         );
-        state.items[taskIndex] = action.payload;
+        state.items[contactsIndex] = action.payload;
+      })
+      .addCase(updateContacts.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
       }),
 });
 

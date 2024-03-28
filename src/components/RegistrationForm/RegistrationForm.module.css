@@ -1,9 +1,40 @@
 .form {
-  width: 320px;
+  width: 500px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  background-color: #e7e7e7;
 }
 
 .label {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+.button {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 1px #999;
+}
+.input {
+  padding: 8px;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }
