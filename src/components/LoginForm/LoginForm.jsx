@@ -1,15 +1,32 @@
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operation";
+import { useSelector } from "react-redux";
+import { selectError } from "../../redux/auth/selectors";
 
 import css from "./LoginForm.module.css";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
+  const error = useSelector(selectError);
+  const [submittedWithError, setSubmittedWithError] = useState(false);
 
   const handleSubmit = (values, actions) => {
     dispatch(logIn(values));
     actions.resetForm();
+  };
+  useEffect(() => {
+    if (error && submittedWithError) {
+      toast.error(`Ops, somthing wrong, Try Again!`);
+    }
+  }, [error, submittedWithError]);
+
+  const handleFormSubmit = (values, actions) => {
+    setSubmittedWithError(true);
+    handleSubmit(values, actions);
   };
 
   return (
@@ -19,7 +36,7 @@ export default function LoginForm() {
           email: "",
           password: "",
         }}
-        onSubmit={handleSubmit}
+        onSubmit={handleFormSubmit}
       >
         <Form className={css.form} autoComplete="off">
           <label className={css.label}>

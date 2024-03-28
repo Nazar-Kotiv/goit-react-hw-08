@@ -24,7 +24,7 @@ export default function ModalEdit({
       .required("Required"),
     number: Yup.string()
       .min(1, "Too Short Number!")
-      .max(11, "Too Long Number!")
+      .max(20, "Too Long Number!")
       .required("Required"),
   });
 
