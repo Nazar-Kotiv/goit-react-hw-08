@@ -9,7 +9,7 @@ export default function AuthorPage() {
         <div className={css.containerImage}>
           <img
             className={css.img}
-            src="../../../image/Nazar-Kotiv.jpg"
+            src="/../../image/Nazar-Kotiv.jpg"
             alt="Author Image"
           ></img>
         </div>
