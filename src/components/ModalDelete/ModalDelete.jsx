@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import Modal from "react-modal";
 import css from "./ModalDelete.module.css";
 
-import { deleteContact } from "../../redux/contacts/operation";
+import { deleteContact } from "../../redux/contacts/operations";
 import { useDispatch } from "react-redux";
 
 Modal.setAppElement("#root");

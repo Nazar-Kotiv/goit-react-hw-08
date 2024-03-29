@@ -5,7 +5,7 @@ import SearchBox from "../components/SearchBox/SearchBox";
 import Loader from "../components/Loader/Loader";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 
-import { fetchContacts } from "../redux/contacts/operation";
+import { fetchContacts } from "../redux/contacts/operations";
 import { selectLoading, selectError } from "../redux/contacts/selectors";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

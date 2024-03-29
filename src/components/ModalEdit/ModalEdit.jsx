@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
-import { updateContacts } from "../../redux/contacts/operation";
+import { updateContacts } from "../../redux/contacts/operations";
 
 Modal.setAppElement("#root");
 
