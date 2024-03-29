@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
-
 import Layout from "../Layout/Layout";
 import Loader from "../Loader/Loader";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
